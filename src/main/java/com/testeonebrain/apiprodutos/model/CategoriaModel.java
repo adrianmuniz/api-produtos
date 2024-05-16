@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -14,8 +16,11 @@ public class CategoriaModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID categoriaId;
+    private Long id;
 
     @Column(nullable = false)
     private String nome;
+
+    @ManyToMany(mappedBy = "categorias")
+    private Set<ProdutoModel> produtos = new HashSet<>();
 }

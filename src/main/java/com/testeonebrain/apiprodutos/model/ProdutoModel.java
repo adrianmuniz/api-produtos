@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -14,7 +16,7 @@ public class ProdutoModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false, length = 50)
     private String nome;
@@ -22,8 +24,15 @@ public class ProdutoModel implements Serializable {
     @Column(nullable = false, length = 150)
     private String descricao;
 
-    private Double preco;
+    @Column(nullable = false)
     private String marca;
-    private Integer precos;
+
+    private Double preco;
+
+    @ManyToMany
+    @JoinTable(name = "tb_produtos_categorias",
+                        joinColumns = @JoinColumn(name = "product_id"),
+                        inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    Set<CategoriaModel> categorias = new HashSet<>();
 
 }
