@@ -8,22 +8,14 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "TB_PRODUTOS")
-public class ProdutoModel implements Serializable {
+@Table(name = "TB_CATEGORIAS")
+public class CategoriaModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private UUID categoriaId;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String nome;
-
-    @Column(nullable = false, length = 150)
-    private String descricao;
-
-    private Double preco;
-    private String marca;
-    private Integer precos;
-
 }
