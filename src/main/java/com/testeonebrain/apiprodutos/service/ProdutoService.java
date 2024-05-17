@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface ProdutoService {
-    ProdutoModel save(ProdutoModel produtoModel);
+    ProdutoDTO save(ProdutoDTO produtoDTO);
 
     Page<ProdutoModel> findAll(Pageable pageable);
 

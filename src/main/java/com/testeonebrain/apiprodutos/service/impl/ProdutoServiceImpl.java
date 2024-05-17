@@ -14,8 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,9 +26,12 @@ public class ProdutoServiceImpl implements ProdutoService {
     CategoriaRepository categoriaRepository;
 
     @Override
-    public ProdutoModel save(ProdutoModel produtoModel) {
+    public ProdutoDTO save(ProdutoDTO produtoDTO) {
 
-        return produtoRepository.save(produtoModel);
+        var entity = new ProdutoModel();
+        copyToEntity(produtoDTO, entity);
+        entity = produtoRepository.save(entity);
+        return new ProdutoDTO(entity);
     }
 
     @Override
@@ -76,6 +77,11 @@ public class ProdutoServiceImpl implements ProdutoService {
         entity.setDescricao(dto.getDescricao());
         entity.setPreco(dto.getPreco());
         entity.setMarca(dto.getMarca());
-        entity.setCategorias(dto.getCategorias());
+
+        entity.getCategorias().clear();
+        for (CategoriaDTO catDto : dto.getCategorias()) {
+            CategoriaModel categoria = categoriaRepository.getOne(catDto.getId());
+            entity.getCategorias().add(categoria);
+        }
     }
 }

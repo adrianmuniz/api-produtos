@@ -1,10 +1,7 @@
 package com.testeonebrain.apiprodutos.controllers;
 
-import com.testeonebrain.apiprodutos.dtos.CategoriaDTO;
 import com.testeonebrain.apiprodutos.dtos.ProdutoDTO;
-import com.testeonebrain.apiprodutos.model.CategoriaModel;
 import com.testeonebrain.apiprodutos.model.ProdutoModel;
-import com.testeonebrain.apiprodutos.repositories.CategoriaRepository;
 import com.testeonebrain.apiprodutos.service.ProdutoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,15 +23,10 @@ public class ProdutoController {
     @Autowired
     ProdutoService produtoService;
 
-    @Autowired
-    CategoriaRepository categoriaRepository;
-
     @PostMapping
-    public ResponseEntity<Object> saveProduct(@RequestBody ProdutoDTO productDto) {
-        var productModel = new ProdutoModel();
-        BeanUtils.copyProperties(productDto, productModel);
-        produtoService.save(productModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productModel);
+    public ResponseEntity<ProdutoDTO> saveProduct(@RequestBody ProdutoDTO productDto) {
+        productDto = produtoService.save(productDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
     }
 
     @GetMapping

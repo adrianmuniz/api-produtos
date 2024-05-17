@@ -20,6 +20,9 @@ public class CategoriaModel implements Serializable {
     @Column(nullable = false)
     private String nome;
 
+    @ManyToMany(mappedBy = "categorias")
+    private Set<ProdutoModel> produtos = new HashSet<>();
+
     public CategoriaModel() {
     }
 

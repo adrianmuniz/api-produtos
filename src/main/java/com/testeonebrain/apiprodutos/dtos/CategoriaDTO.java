@@ -1,7 +1,6 @@
 package com.testeonebrain.apiprodutos.dtos;
 
 import com.testeonebrain.apiprodutos.model.CategoriaModel;
-import lombok.Data;
 
 import java.io.Serializable;
 

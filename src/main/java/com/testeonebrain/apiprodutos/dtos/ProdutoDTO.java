@@ -2,7 +2,6 @@ package com.testeonebrain.apiprodutos.dtos;
 
 import com.testeonebrain.apiprodutos.model.CategoriaModel;
 import com.testeonebrain.apiprodutos.model.ProdutoModel;
-import lombok.Data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,13 +21,13 @@ public class ProdutoDTO implements Serializable {
 
     private Double preco;
 
-    private String categorias;
+    private List<CategoriaDTO> categorias  = new ArrayList<>();
 
     public ProdutoDTO() {
 
     }
 
-    public ProdutoDTO(Long id, String nome, String descricao, String marca, Double preco, String categorias) {
+    public ProdutoDTO(Long id, String nome, String descricao, String marca, Double preco, List<CategoriaDTO> categorias) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -43,7 +42,11 @@ public class ProdutoDTO implements Serializable {
         this.descricao = entity.getDescricao();
         this.preco = entity.getPreco();
         this.marca = entity.getMarca();
-        this.categorias = entity.getCategorias();
+    }
+
+    public ProdutoDTO(ProdutoModel entity, Set<CategoriaModel> categorias) {
+        this(entity);
+        categorias.forEach(cat -> this.categorias.add(new CategoriaDTO(cat)));
     }
 
     public Long getId() {
@@ -86,11 +89,11 @@ public class ProdutoDTO implements Serializable {
         this.preco = preco;
     }
 
-    public String getCategorias() {
+    public List<CategoriaDTO> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(String categorias) {
-        this.categorias = categorias;
+    public void setCategorias(List<CategoriaDTO> categories) {
+        this.categorias = categories;
     }
 }

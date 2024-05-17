@@ -29,7 +29,10 @@ public class ProdutoModel implements Serializable {
 
     private Double preco;
 
-    @Column(nullable = false)
-    private String categorias;
+    @ManyToMany
+    @JoinTable(name = "TB_PRODUTOS_CATEGORIA",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    Set<CategoriaModel> categorias = new HashSet<>();
 
 }
