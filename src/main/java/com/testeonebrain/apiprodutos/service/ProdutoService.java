@@ -5,8 +5,12 @@ import com.testeonebrain.apiprodutos.model.ProdutoModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public interface ProdutoService {
     ProdutoDTO save(ProdutoDTO produtoDTO);
 
     Page<ProdutoModel> findAll(Pageable pageable);
+
+    Optional<ProdutoModel> findById(Long produtoId);
 }

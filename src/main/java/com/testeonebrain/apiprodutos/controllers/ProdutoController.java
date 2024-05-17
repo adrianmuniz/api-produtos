@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "x", maxAge = 3600)
@@ -38,6 +39,16 @@ public class ProdutoController {
     @GetMapping
     public ResponseEntity<Page<ProdutoModel>> findAll(@PageableDefault(page =0, size =10, sort = "produtoId", direction = Sort.Direction.ASC)Pageable pageable){
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findAll(pageable));
+    }
+
+    @GetMapping("/{produtoId}")
+    public ResponseEntity<Object> getOneProduct(@PathVariable(value = "produtoId")Long produtoId){
+        Optional<ProdutoModel> produtoModel = produtoService.findById(produtoId);
+        if (!produtoModel.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(produtoModel.get());
+        }
     }
 
 }

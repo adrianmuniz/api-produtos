@@ -38,6 +38,11 @@ public class ProdutoServiceImpl implements ProdutoService {
         return produtoRepository.findAll(pageable);
     }
 
+    @Override
+    public Optional<ProdutoModel> findById(Long produtoId) {
+        return produtoRepository.findById(produtoId);
+    }
+
     public void copyToEntity(ProdutoDTO dto, ProdutoModel entity){
         entity.setNome(dto.getNome());
         entity.setDescricao(dto.getDescricao());
