@@ -14,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,11 +28,9 @@ public class ProdutoServiceImpl implements ProdutoService {
     CategoriaRepository categoriaRepository;
 
     @Override
-    public ProdutoDTO save(ProdutoDTO produtoDTO) {
-        var entity = new ProdutoModel();
-        copyToEntity(produtoDTO, entity);
-        entity = produtoRepository.save(entity);
-        return new ProdutoDTO(entity);
+    public ProdutoModel save(ProdutoModel produtoModel) {
+
+        return produtoRepository.save(produtoModel);
     }
 
     @Override
@@ -66,16 +66,16 @@ public class ProdutoServiceImpl implements ProdutoService {
         return produtoRepository.findByMarca(marca, pageable);
     }
 
+    @Override
+    public Page<ProdutoModel> findByCategoria(String categoria, Pageable pageable) {
+        return produtoRepository.findByCategoria(categoria, pageable);
+    }
+
     public void copyToEntity(ProdutoDTO dto, ProdutoModel entity){
         entity.setNome(dto.getNome());
         entity.setDescricao(dto.getDescricao());
         entity.setPreco(dto.getPreco());
         entity.setMarca(dto.getMarca());
-
-        entity.getCategorias().clear();
-        for (CategoriaDTO catDto : dto.getCategorias()) {
-            CategoriaModel categoria = categoriaRepository.getOne(catDto.getId());
-            entity.getCategorias().add(categoria);
-        }
+        entity.setCategorias(dto.getCategorias());
     }
 }

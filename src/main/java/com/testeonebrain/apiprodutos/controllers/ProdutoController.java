@@ -31,9 +31,11 @@ public class ProdutoController {
     CategoriaRepository categoriaRepository;
 
     @PostMapping
-    public ResponseEntity<ProdutoDTO> saveProduct(@RequestBody ProdutoDTO productDto) {
-        productDto = produtoService.save(productDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
+    public ResponseEntity<Object> saveProduct(@RequestBody ProdutoDTO productDto) {
+        var productModel = new ProdutoModel();
+        BeanUtils.copyProperties(productDto, productModel);
+        produtoService.save(productModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(productModel);
     }
 
     @GetMapping
@@ -64,12 +66,17 @@ public class ProdutoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
         } else {
             produtoService.delete(produtoModel.get());
-            return ResponseEntity.status(HttpStatus.OK).body("User deleted succes");
+            return ResponseEntity.status(HttpStatus.OK).body("Product deleted succes");
         }
     }
 
-    @GetMapping("/marca/{marca}")
+    @GetMapping("/marcas/{marca}")
     public ResponseEntity<Page<ProdutoModel>> getProdutoByMarca(@PathVariable(value = "marca")String marca, @PageableDefault(page =0, size =10, sort = "marca", direction = Sort.Direction.ASC)Pageable pageable){
             return ResponseEntity.status(HttpStatus.OK).body(produtoService.findByMarca(marca, pageable));
+    }
+
+    @GetMapping("/categorias/{categoria}")
+    public ResponseEntity<Page<ProdutoModel>> getProdutoByCategoria(@PathVariable(value = "categoria")String categoria, @PageableDefault(page =0, size =10, sort = "marca", direction = Sort.Direction.ASC)Pageable pageable){
+            return ResponseEntity.status(HttpStatus.OK).body(produtoService.findByCategoria(categoria, pageable));
     }
 }

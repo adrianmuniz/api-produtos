@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface ProdutoService {
-    ProdutoDTO save(ProdutoDTO produtoDTO);
+    ProdutoModel save(ProdutoModel produtoModel);
 
     Page<ProdutoModel> findAll(Pageable pageable);
 
@@ -19,4 +19,6 @@ public interface ProdutoService {
     void delete(ProdutoModel produtoModel);
 
     Page<ProdutoModel> findByMarca(String marca, Pageable pageable);
+
+    Page<ProdutoModel> findByCategoria(String categoria, Pageable pageable);
 }

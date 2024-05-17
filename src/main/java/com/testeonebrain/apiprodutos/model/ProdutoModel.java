@@ -1,5 +1,6 @@
 package com.testeonebrain.apiprodutos.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -28,10 +29,7 @@ public class ProdutoModel implements Serializable {
 
     private Double preco;
 
-    @ManyToMany
-    @JoinTable(name = "tb_produtos_categorias",
-                        joinColumns = @JoinColumn(name = "product_id"),
-                        inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-    Set<CategoriaModel> categorias = new HashSet<>();
+    @Column(nullable = false)
+    private String categorias;
 
 }

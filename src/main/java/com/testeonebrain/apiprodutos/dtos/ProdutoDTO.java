@@ -22,13 +22,13 @@ public class ProdutoDTO implements Serializable {
 
     private Double preco;
 
-    private List<CategoriaDTO> categorias = new ArrayList<>();
+    private String categorias;
 
     public ProdutoDTO() {
 
     }
 
-    public ProdutoDTO(Long id, String nome, String descricao, String marca, Double preco, List<CategoriaDTO> categorias) {
+    public ProdutoDTO(Long id, String nome, String descricao, String marca, Double preco, String categorias) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -43,11 +43,7 @@ public class ProdutoDTO implements Serializable {
         this.descricao = entity.getDescricao();
         this.preco = entity.getPreco();
         this.marca = entity.getMarca();
-    }
-
-    public ProdutoDTO(ProdutoModel entity, Set<CategoriaModel> categories) {
-        this(entity);
-        categories.forEach(cat -> this.categorias.add(new CategoriaDTO(cat)));
+        this.categorias = entity.getCategorias();
     }
 
     public Long getId() {
@@ -90,11 +86,11 @@ public class ProdutoDTO implements Serializable {
         this.preco = preco;
     }
 
-    public List<CategoriaDTO> getCategorias() {
+    public String getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(List<CategoriaDTO> categorias) {
+    public void setCategorias(String categorias) {
         this.categorias = categorias;
     }
 }
