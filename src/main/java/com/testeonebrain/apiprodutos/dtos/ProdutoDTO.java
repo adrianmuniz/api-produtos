@@ -1,12 +1,14 @@
 package com.testeonebrain.apiprodutos.dtos;
 
+import com.testeonebrain.apiprodutos.model.CategoriaModel;
+import com.testeonebrain.apiprodutos.model.ProdutoModel;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-@Data
 public class ProdutoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -21,4 +23,78 @@ public class ProdutoDTO implements Serializable {
     private Double preco;
 
     private List<CategoriaDTO> categorias = new ArrayList<>();
+
+    public ProdutoDTO() {
+
+    }
+
+    public ProdutoDTO(Long id, String nome, String descricao, String marca, Double preco, List<CategoriaDTO> categorias) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.marca = marca;
+        this.preco = preco;
+        this.categorias = categorias;
+    }
+
+    public ProdutoDTO(ProdutoModel entity) {
+        this.id = entity.getProdutoId();
+        this.nome = entity.getNome();
+        this.descricao = entity.getDescricao();
+        this.preco = entity.getPreco();
+        this.marca = entity.getMarca();
+    }
+
+    public ProdutoDTO(ProdutoModel entity, Set<CategoriaModel> categories) {
+        this(entity);
+        categories.forEach(cat -> this.categorias.add(new CategoriaDTO(cat)));
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public List<CategoriaDTO> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<CategoriaDTO> categorias) {
+        this.categorias = categorias;
+    }
 }
