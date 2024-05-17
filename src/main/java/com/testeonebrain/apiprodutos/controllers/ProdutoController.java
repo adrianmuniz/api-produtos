@@ -55,5 +55,16 @@ public class ProdutoController {
     public ResponseEntity<ProdutoDTO> updatProduct(@PathVariable(value = "produtoId")Long productId, @RequestBody ProdutoDTO productDto) {
             productDto = produtoService.update(productId, productDto);
             return ResponseEntity.ok().body(productDto);
+    }
+
+    @DeleteMapping("/{produtoId}")
+    public ResponseEntity<Object> deleteProduct(@PathVariable(value = "produtoId")Long productId){
+        Optional<ProdutoModel> produtoModel = produtoService.findById(productId);
+        if (!produtoModel.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+        } else {
+            produtoService.delete(produtoModel.get());
+            return ResponseEntity.status(HttpStatus.OK).body("User deleted succes");
         }
+    }
 }

@@ -55,6 +55,11 @@ public class ProdutoServiceImpl implements ProdutoService {
         }
     }
 
+    @Override
+    public void delete(ProdutoModel produtoModel) {
+        produtoRepository.delete(produtoModel);
+    }
+
     public void copyToEntity(ProdutoDTO dto, ProdutoModel entity){
         entity.setNome(dto.getNome());
         entity.setDescricao(dto.getDescricao());

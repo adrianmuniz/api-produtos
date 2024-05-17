@@ -15,4 +15,6 @@ public interface ProdutoService {
     Optional<ProdutoModel> findById(Long produtoId);
 
     ProdutoDTO update(Long productId, ProdutoDTO productDto);
+
+    void delete(ProdutoModel produtoModel);
 }
