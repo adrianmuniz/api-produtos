@@ -51,4 +51,16 @@ public class ProdutoController {
         }
     }
 
+    @PutMapping("/{produtoId}")
+    public ResponseEntity<ProdutoDTO> updatProduct(@PathVariable(value = "produtoId")Long productId, @RequestBody ProdutoDTO productDto) {
+//        Optional<ProdutoModel> produtoModel = produtoService.findById(productId);
+//        if (!produtoModel.isPresent()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+//        } else {
+//            var updateProduct = new ProdutoModel();
+//            updateProduct = produtoService.update(produtoModel);
+//            return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
+            productDto = produtoService.update(productId, productDto);
+            return ResponseEntity.ok().body(productDto);
+        }
 }

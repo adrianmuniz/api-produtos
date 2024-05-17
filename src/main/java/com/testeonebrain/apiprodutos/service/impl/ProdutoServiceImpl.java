@@ -7,13 +7,13 @@ import com.testeonebrain.apiprodutos.model.ProdutoModel;
 import com.testeonebrain.apiprodutos.repositories.CategoriaRepository;
 import com.testeonebrain.apiprodutos.repositories.ProdutoRepository;
 import com.testeonebrain.apiprodutos.service.ProdutoService;
-import org.springframework.beans.BeanUtils;
+import com.testeonebrain.apiprodutos.service.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,6 +41,18 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public Optional<ProdutoModel> findById(Long produtoId) {
         return produtoRepository.findById(produtoId);
+    }
+
+    @Override
+    public ProdutoDTO update(Long productId, ProdutoDTO productDto) {
+        try {
+            ProdutoModel entity = produtoRepository.getOne(productId);
+            copyToEntity(productDto, entity);
+            entity = produtoRepository.save(entity);
+            return new ProdutoDTO(entity);
+        } catch (EntityNotFoundException e) {
+                throw new ResourceNotFoundException("Id Not Found" + productId);
+        }
     }
 
     public void copyToEntity(ProdutoDTO dto, ProdutoModel entity){

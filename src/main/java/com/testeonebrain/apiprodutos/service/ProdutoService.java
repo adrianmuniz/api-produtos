@@ -13,4 +13,6 @@ public interface ProdutoService {
     Page<ProdutoModel> findAll(Pageable pageable);
 
     Optional<ProdutoModel> findById(Long produtoId);
+
+    ProdutoDTO update(Long productId, ProdutoDTO productDto);
 }
