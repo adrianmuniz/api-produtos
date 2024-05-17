@@ -17,4 +17,6 @@ public interface ProdutoService {
     ProdutoDTO update(Long productId, ProdutoDTO productDto);
 
     void delete(ProdutoModel produtoModel);
+
+    Page<ProdutoModel> findByMarca(String marca, Pageable pageable);
 }

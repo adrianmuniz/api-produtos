@@ -60,6 +60,12 @@ public class ProdutoServiceImpl implements ProdutoService {
         produtoRepository.delete(produtoModel);
     }
 
+    @Override
+    public Page<ProdutoModel> findByMarca(String marca, Pageable pageable) {
+
+        return produtoRepository.findByMarca(marca, pageable);
+    }
+
     public void copyToEntity(ProdutoDTO dto, ProdutoModel entity){
         entity.setNome(dto.getNome());
         entity.setDescricao(dto.getDescricao());

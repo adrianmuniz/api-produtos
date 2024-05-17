@@ -67,4 +67,9 @@ public class ProdutoController {
             return ResponseEntity.status(HttpStatus.OK).body("User deleted succes");
         }
     }
+
+    @GetMapping("/marca/{marca}")
+    public ResponseEntity<Page<ProdutoModel>> getProdutoByMarca(@PathVariable(value = "marca")String marca, @PageableDefault(page =0, size =10, sort = "marca", direction = Sort.Direction.ASC)Pageable pageable){
+            return ResponseEntity.status(HttpStatus.OK).body(produtoService.findByMarca(marca, pageable));
+    }
 }
