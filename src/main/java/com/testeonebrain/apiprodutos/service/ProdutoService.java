@@ -20,5 +20,5 @@ public interface ProdutoService {
 
     Page<ProdutoModel> findByMarca(String marca, Pageable pageable);
 
-    Page<ProdutoModel> findByCategoria(String categoria, Pageable pageable);
+    Page<ProdutoModel> findByCategoria(Long categoriaId, Pageable pageable);
 }

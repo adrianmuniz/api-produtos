@@ -66,8 +66,8 @@ public class ProdutoController {
             return ResponseEntity.status(HttpStatus.OK).body(produtoService.findByMarca(marca, pageable));
     }
 
-    @GetMapping("/categorias/{categoria}")
-    public ResponseEntity<Page<ProdutoModel>> getProdutoByCategoria(@PathVariable(value = "categoria")String categoria, @PageableDefault(page =0, size =10, sort = "marca", direction = Sort.Direction.ASC)Pageable pageable){
-            return ResponseEntity.status(HttpStatus.OK).body(produtoService.findByCategoria(categoria, pageable));
+    @GetMapping("/categorias/{categoriaId}")
+    public ResponseEntity<Page<ProdutoModel>> getProdutoByCategoria(@PathVariable(value = "categoriaId")Long categoriaId, @PageableDefault(page =0, size =10, sort = "id", direction = Sort.Direction.ASC)Pageable pageable){
+            return ResponseEntity.status(HttpStatus.OK).body(produtoService.findByCategoria(categoriaId, pageable));
     }
 }

@@ -68,8 +68,8 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public Page<ProdutoModel> findByCategoria(String categoria, Pageable pageable) {
-        return produtoRepository.findByCategoria(categoria, pageable);
+    public Page<ProdutoModel> findByCategoria(Long categoriaId, Pageable pageable) {
+        return produtoRepository.findByCategoria(categoriaId, pageable);
     }
 
     public void copyToEntity(ProdutoDTO dto, ProdutoModel entity){

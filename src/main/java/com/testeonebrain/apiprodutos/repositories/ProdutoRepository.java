@@ -14,6 +14,6 @@ public interface ProdutoRepository extends JpaRepository<ProdutoModel, Long> {
     @Query("SELECT obj FROM ProdutoModel obj WHERE LOWER(obj.marca) LIKE LOWER(CONCAT('%', :marca, '%'))")
     Page<ProdutoModel> findByMarca(String marca, Pageable pageable);
 
-    @Query("SELECT obj FROM ProdutoModel obj WHERE LOWER(obj.categorias) LIKE LOWER(CONCAT('%', :categoria, '%'))")
-    Page<ProdutoModel> findByCategoria(String categoria, Pageable pageable);
+    @Query("SELECT obj FROM ProdutoModel obj INNER JOIN obj.categorias cat WHERE cat.id = :categoriaId")
+    Page<ProdutoModel> findByCategoria(Long categoriaId, Pageable pageable);
 }
