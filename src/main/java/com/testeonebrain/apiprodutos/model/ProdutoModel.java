@@ -29,6 +29,9 @@ public class ProdutoModel implements Serializable {
 
     private Double preco;
 
+    @Column(nullable = false)
+    private boolean ativo;
+
     @ManyToMany
     @JoinTable(name = "TB_PRODUTOS_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),

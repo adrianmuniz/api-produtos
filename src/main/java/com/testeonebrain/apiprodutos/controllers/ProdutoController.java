@@ -39,6 +39,8 @@ public class ProdutoController {
         Optional<ProdutoModel> produtoModel = produtoService.findById(produtoId);
         if (!produtoModel.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+        } if (!produtoModel.get().isAtivo()){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("product is not active");
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(produtoModel.get());
         }
@@ -69,5 +71,17 @@ public class ProdutoController {
     @GetMapping("/categorias/{categoriaId}")
     public ResponseEntity<Page<ProdutoModel>> getProdutoByCategoria(@PathVariable(value = "categoriaId")Long categoriaId, @PageableDefault(page =0, size =10, sort = "id", direction = Sort.Direction.ASC)Pageable pageable){
             return ResponseEntity.status(HttpStatus.OK).body(produtoService.findByCategoria(categoriaId, pageable));
+    }
+
+    @PutMapping("/{produtoId}/desativar")
+    public ResponseEntity<Object> desativarProduct(@PathVariable(value = "produtoId")Long productId, ProdutoDTO productDto) {
+        productDto = produtoService.inativarProduto(productId, productDto);
+        return ResponseEntity.ok().body("Produto desativado com Sucesso");
+    }
+
+    @PutMapping("/{produtoId}/ativar")
+    public ResponseEntity<Object> ativarProduct(@PathVariable(value = "produtoId")Long productId, ProdutoDTO productDto) {
+        productDto = produtoService.ativarProduto(productId, productDto);
+        return ResponseEntity.ok().body("Produto ativado com Sucesso");
     }
 }

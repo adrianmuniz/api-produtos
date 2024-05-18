@@ -63,7 +63,6 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public Page<ProdutoModel> findByMarca(String marca, Pageable pageable) {
-
         return produtoRepository.findByMarca(marca, pageable);
     }
 
@@ -72,11 +71,36 @@ public class ProdutoServiceImpl implements ProdutoService {
         return produtoRepository.findByCategoria(categoriaId, pageable);
     }
 
+    @Override
+    public ProdutoDTO inativarProduto(Long productId, ProdutoDTO productDto) {
+        try {
+            ProdutoModel entity = produtoRepository.getOne(productId);
+            entity.setAtivo(!productDto.isAtivo());
+            entity = produtoRepository.save(entity);
+            return new ProdutoDTO(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id Not Found" + productId);
+        }
+    }
+
+    @Override
+    public ProdutoDTO ativarProduto(Long productId, ProdutoDTO productDto) {
+        try {
+            ProdutoModel entity = produtoRepository.getOne(productId);
+            entity.setAtivo(productDto.isAtivo());
+            entity = produtoRepository.save(entity);
+            return new ProdutoDTO(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id Not Found" + productId);
+        }
+    }
+
     public void copyToEntity(ProdutoDTO dto, ProdutoModel entity){
         entity.setNome(dto.getNome());
         entity.setDescricao(dto.getDescricao());
         entity.setPreco(dto.getPreco());
         entity.setMarca(dto.getMarca());
+        entity.setAtivo(dto.isAtivo());
 
         entity.getCategorias().clear();
         for (CategoriaDTO catDto : dto.getCategorias()) {

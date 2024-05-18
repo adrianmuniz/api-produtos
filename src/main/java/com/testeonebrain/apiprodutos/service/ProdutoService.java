@@ -21,4 +21,8 @@ public interface ProdutoService {
     Page<ProdutoModel> findByMarca(String marca, Pageable pageable);
 
     Page<ProdutoModel> findByCategoria(Long categoriaId, Pageable pageable);
+
+    ProdutoDTO inativarProduto(Long productId, ProdutoDTO productDto);
+
+    ProdutoDTO ativarProduto(Long productId, ProdutoDTO productDto);
 }

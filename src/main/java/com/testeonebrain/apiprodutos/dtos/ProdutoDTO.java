@@ -21,18 +21,21 @@ public class ProdutoDTO implements Serializable {
 
     private Double preco;
 
+    private boolean ativo;
+
     private List<CategoriaDTO> categorias  = new ArrayList<>();
 
     public ProdutoDTO() {
 
     }
 
-    public ProdutoDTO(Long id, String nome, String descricao, String marca, Double preco, List<CategoriaDTO> categorias) {
+    public ProdutoDTO(Long id, String nome, String descricao, String marca, Double preco, boolean ativo, List<CategoriaDTO> categorias) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.marca = marca;
         this.preco = preco;
+        this.ativo = ativo;
         this.categorias = categorias;
     }
 
@@ -95,5 +98,13 @@ public class ProdutoDTO implements Serializable {
 
     public void setCategorias(List<CategoriaDTO> categories) {
         this.categorias = categories;
+    }
+
+    public boolean isAtivo() {
+        return true;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }
