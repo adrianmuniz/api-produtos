@@ -1,6 +1,5 @@
 package com.testeonebrain.apiprodutos.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,7 +18,6 @@ public class CategoriaModel implements Serializable {
     @Column(nullable = false)
     private String nome;
 
-    @JsonIgnore
     private boolean ativo;
 
     @ManyToMany(mappedBy = "categorias")
@@ -50,7 +48,7 @@ public class CategoriaModel implements Serializable {
     }
 
     public boolean isAtivo() {
-        return ativo;
+        return true;
     }
 
     public void setAtivo(boolean ativo) {
