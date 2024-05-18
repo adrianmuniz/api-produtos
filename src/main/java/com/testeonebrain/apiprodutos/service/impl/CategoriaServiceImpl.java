@@ -1,9 +1,7 @@
 package com.testeonebrain.apiprodutos.service.impl;
 
 import com.testeonebrain.apiprodutos.dtos.CategoriaDTO;
-import com.testeonebrain.apiprodutos.dtos.ProdutoDTO;
 import com.testeonebrain.apiprodutos.model.CategoriaModel;
-import com.testeonebrain.apiprodutos.model.ProdutoModel;
 import com.testeonebrain.apiprodutos.repositories.CategoriaRepository;
 import com.testeonebrain.apiprodutos.service.CategoriaService;
 import com.testeonebrain.apiprodutos.service.exceptions.ResourceNotFoundException;

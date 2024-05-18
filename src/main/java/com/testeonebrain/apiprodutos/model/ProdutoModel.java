@@ -1,6 +1,5 @@
 package com.testeonebrain.apiprodutos.model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 

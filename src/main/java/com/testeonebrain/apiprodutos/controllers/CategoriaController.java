@@ -2,7 +2,6 @@ package com.testeonebrain.apiprodutos.controllers;
 
 import com.testeonebrain.apiprodutos.dtos.CategoriaDTO;
 import com.testeonebrain.apiprodutos.model.CategoriaModel;
-import com.testeonebrain.apiprodutos.model.ProdutoModel;
 import com.testeonebrain.apiprodutos.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

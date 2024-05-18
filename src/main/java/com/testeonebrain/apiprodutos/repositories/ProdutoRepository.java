@@ -22,7 +22,4 @@ public interface ProdutoRepository extends JpaRepository<ProdutoModel, Long> {
     @Query("SELECT obj FROM ProdutoModel obj WHERE obj.ativo = true")
     Page<ProdutoModel> findAll(Pageable pageable);
 
-//    @Override
-//    @Query("SELECT obj FROM ProdutoModel obj WHERE obj.ativo = true")
-//    Optional<ProdutoModel> findById(Long productId);
 }

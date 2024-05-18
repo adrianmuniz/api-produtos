@@ -3,7 +3,6 @@ package com.testeonebrain.apiprodutos.controllers;
 import com.testeonebrain.apiprodutos.dtos.ProdutoDTO;
 import com.testeonebrain.apiprodutos.model.ProdutoModel;
 import com.testeonebrain.apiprodutos.service.ProdutoService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
