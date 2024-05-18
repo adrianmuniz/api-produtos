@@ -52,6 +52,9 @@ public class ProdutoDTO implements Serializable {
         categorias.forEach(cat -> this.categorias.add(new CategoriaDTO(cat)));
     }
 
+    public ProdutoDTO(CategoriaModel entity) {
+    }
+
     public Long getId() {
         return id;
     }
